@@ -1,0 +1,3 @@
+,RUN_NAME,split num,epoch,loss,accuracy,roc_auc,tuned weights bool
+0,20210225-0347 - arch=efficientnet_b3a - samples=-1 frozen=1 epochs=5 bs=14 res=256,1,5,35.244686126708984,0.4053388237953186,0.5850526039058778,True
+1,20210225-0347 - arch=efficientnet_b3a - samples=-1 frozen=1 epochs=5 bs=14 res=256,1,10,27.907556533813477,0.40451744198799133,0.5784117377539478,True

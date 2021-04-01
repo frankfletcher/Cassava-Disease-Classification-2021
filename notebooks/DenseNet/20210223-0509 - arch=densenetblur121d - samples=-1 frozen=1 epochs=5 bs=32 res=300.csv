@@ -1,0 +1,6 @@
+epoch,train_loss,valid_loss,error_rate,accuracy,roc_auc_score,time
+epoch,train_loss,valid_loss,error_rate,accuracy,roc_auc_score,time
+0,1.2863383293151855,1.071926474571228,0.31752273440361023,0.6824772953987122,0.814281703099834,04:02
+epoch,train_loss,valid_loss,error_rate,accuracy,roc_auc_score,time
+epoch,train_loss,valid_loss,error_rate,accuracy,roc_auc_score,time
+0,nan,None,None,None,None,00:01
