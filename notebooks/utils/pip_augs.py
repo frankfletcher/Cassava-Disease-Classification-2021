@@ -32,33 +32,33 @@ im1,im2,im3,im4 = None,None,None,None
 
 def create_pip(img):
     xdim = img.shape[0]
-    
+
     # Create PIPs for the GPUs viewing pleasure ONLY if it's representative of a leaf
-    for i in range(5):  # only 5 tries, otherwise, stick with it
+    for _ in range(5):  # only 5 tries, otherwise, stick with it
         pip = arrc(image=img)['image']
-        
+
         if np.mean(pip[1]) < (np.mean(pip[0]) +6): continue   # green > red + 6
         if np.mean(pip[1]) < (np.mean(pip[2]) +10): continue   # green > blue + 6
-            
+
         if np.mean(pip) < 70: continue  # don't accept if too dark
         if np.mean(pip) > 230: continue   # don't accept if too bright
-            
+
         if np.mean(pip[1]) < 90: continue  # specifically green should be midrange
         if np.mean(pip[1]) > 160: continue
-            
+
         # otherwise break out
         break
-            
-            
+
+
     # centralize the image tones somewhat (not exactly)
-    if np.mean(pip) < 110: pip = cv2.add(pip, 118 - round(np.mean(pip)))      
+    if np.mean(pip) < 110: pip = cv2.add(pip, 118 - round(np.mean(pip)))
     if np.mean(pip) > 150: pip = cv2.subtract(pip, int(round(np.mean(pip) - 140)))
-            
+
     # Sharpen PIPs to counter blowing them up @TODO change the parameters instead of 2x-ing
     pip = asharp(image=pip)['image']
     pip = asharp(image=pip)['image']
 
-    
+
     return pip
 
 

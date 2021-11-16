@@ -85,7 +85,7 @@ import kornia
 def convert_MP_to_blurMP(model, layer_type_old):
     conversion_count = 0
     for name, module in reversed(model._modules.items()):
-        if len(list(module.children())) > 0:
+        if list(module.children()):
             # recurse
             model._modules[name] = convert_MP_to_blurMP(module, layer_type_old)
 
@@ -100,7 +100,7 @@ def convert_MP_to_blurMP(model, layer_type_old):
 def convert_act_cls(model, layer_type_old, layer_type_new):
     conversion_count = 0
     for name, module in reversed(model._modules.items()):
-        if len(list(module.children())) > 0:
+        if list(module.children()):
             # recurse
             model._modules[name] = convert_act_cls(module, layer_type_old, layer_type_new)
 
@@ -137,7 +137,7 @@ class CheckpointModule(Module):
 def convert_seq_chkpt(model, layer_type_old=nn.Sequential):  
     conversion_count = 0
     for name, module in reversed(model._modules.items()):
-        if len(list(module.children())) > 0:
+        if list(module.children()):
             # recurse
             model._modules[name] = convert_seq_chkpt(module, layer_type_old) 
 
@@ -201,8 +201,7 @@ class MishAutoFn(torch.autograd.Function):
     @staticmethod
     def forward(ctx, x):
         ctx.save_for_backward(x)
-        y = x.mul(torch.tanh(F.softplus(x)))  # x * tanh(ln(1 + exp(x)))
-        return y
+        return x.mul(torch.tanh(F.softplus(x)))
 
     @staticmethod
     def backward(ctx, grad_output):
